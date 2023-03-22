@@ -7,6 +7,7 @@ class History:  # work in progress, will track individual users' logs
         self.hotels = hotels
         self.photo_check = photo_check
         self.price_sort = price_sort
+        self.data = dict()
 
 
 history = History(log_dict=dict())
