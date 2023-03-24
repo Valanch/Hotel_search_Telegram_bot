@@ -7,6 +7,7 @@ from loader import bot
 def send_welcome(message):
     if message.text == "/start":
         bot.send_message(message.from_user.id, "Welcome to the hotel bot")
+        helper(message)
     if message.text == "/help":
         helper(message)
 

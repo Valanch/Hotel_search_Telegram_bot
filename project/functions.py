@@ -238,9 +238,8 @@ def highprice(message):
 def bestdeal(message):
     # Changes sorting method to distance from the city center. Missing price arguments compared to other commands
     # since those are added by user further down the line.
-    history.data[message.from_user.id] = {"command": "bestdeal", "sort": "DISTANCE"}
+    history.data[message.from_user.id] = {"command": "bestdeal", "sort": "PROPERTY_CLASS"}
     bot.send_message(message.from_user.id, "Which city are we searching in?")
-    history.price_sort = "DISTANCE"
     bot.register_next_step_handler(message, fetch_city)
 
 
