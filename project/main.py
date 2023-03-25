@@ -1,11 +1,27 @@
-import telebot
+from functions import lowprice, highprice, bestdeal, histor, helper
+from loader import bot
 
-bot = telebot.TeleBot("6205848362:AAGWdx5uJ-TahvfqO3PEuUiyHkM44R9LhYM")
 
 
-@bot.message_handler(commands=['hello-world'])
+@bot.message_handler(commands=["start", "help"])
 def send_welcome(message):
-    bot.reply_to(message, "Hello world")
+    if message.text == "/start":
+        bot.send_message(message.from_user.id, "Welcome to the hotel bot")
+        helper(message)
+    if message.text == "/help":
+        helper(message)
+
+
+@bot.message_handler(commands=["lowprice", "highprice", "bestdeal", "history"])
+def execute_command(message):
+    if message.text == "/lowprice":
+        lowprice(message)
+    if message.text == "/highprice":
+        highprice(message)
+    if message.text == "/bestdeal":
+        bestdeal(message)
+    if message.text == "/history":
+        histor(message)
 
 
 @bot.message_handler(content_types=['text'])
@@ -13,7 +29,8 @@ def get_text_messages(message):
     if message.text == "Привет":
         bot.send_message(message.from_user.id, "Thank you for switching to English")
     else:
-        bot.send_message(message.from_user.id, "Try saying something else")
+        bot.send_message(message.from_user.id, "Please refer to the /help command")
 
 
-bot.polling(none_stop=True, interval=0)
+if __name__ == '__main__':
+    bot.polling(none_stop=True, interval=0)
